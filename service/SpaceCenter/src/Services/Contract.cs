@@ -4,6 +4,11 @@ using KRPC.Service.Attributes;
 using KRPC.SpaceCenter.ExtensionMethods;
 using KRPC.Utils;
 
+using System.Reflection;
+using Contracts.Templates;
+using FinePrint.Contracts;
+using FinePrint.Contracts.Parameters;
+
 namespace KRPC.SpaceCenter.Services
 {
     /// <summary>
@@ -254,6 +259,97 @@ namespace KRPC.SpaceCenter.Services
                 for (int i = 0; i < contract.ParameterCount; i++)
                     result.Add(new ContractParameter(contract.GetParameter(i)));
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// target CelestialBody for the contract.
+        /// </summary>
+        [KRPCProperty]
+        public CelestialBody targetBody {
+            get
+            {
+                var contract = InternalContract;
+                if (contract == null)
+                    return null;
+                
+                bool checkTitle = false;
+
+                System.Type t = contract.GetType();
+
+                try
+                {
+                    if (t == typeof(CollectScience))
+                        return new CelestialBody(((CollectScience)contract).TargetBody);
+                    else if (t == typeof(PartTest))
+                    {
+                        var fields = typeof(PartTest).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+                        return fields[1].GetValue((PartTest)contract) as CelestialBody;
+                    }
+                    else if (t == typeof(PlantFlag))
+                        return new CelestialBody(((PlantFlag)contract).TargetBody);
+                    else if (t == typeof(RecoverAsset))
+                    {
+                        var fields = typeof(RecoverAsset).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+                        return fields[0].GetValue((RecoverAsset)contract) as CelestialBody;
+                    }
+                    else if (t == typeof(GrandTour))
+                        return new CelestialBody(((GrandTour)contract).TargetBodies.LastOrDefault());
+                    else if (t == typeof(ARMContract))
+                    {
+                        var fields = typeof(ARMContract).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+                        return fields[0].GetValue((ARMContract)contract) as CelestialBody;
+                    }
+                    else if (t == typeof(BaseContract))
+                        return new CelestialBody(((BaseContract)contract).targetBody);
+                    else if (t == typeof(ISRUContract))
+                        return new CelestialBody(((ISRUContract)contract).targetBody);
+                    else if (t == typeof(SatelliteContract))
+                    {
+                        SpecificOrbitParameter p = contract.GetParameter<SpecificOrbitParameter>();
+
+                        if (p == null)
+                            return null;
+
+                        return new CelestialBody(p.TargetBody);
+                    }
+                    else if (t == typeof(StationContract))
+                        return new CelestialBody(((StationContract)contract).targetBody);
+                    else if (t == typeof(SurveyContract))
+                        return new CelestialBody(((SurveyContract)contract).targetBody);
+                    else if (t == typeof(TourismContract))
+                        return null;
+                    else if (t == typeof(ExplorationContract))
+                    {
+                        var fields = typeof(ExplorationContract).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+                        return fields[1].GetValue((ExplorationContract)contract) as CelestialBody;
+                    }
+                    else
+                        checkTitle = true;
+                }
+                catch (System.Exception e)
+                {
+                    return null;
+                }
+
+                if (checkTitle)
+                {
+                    foreach (global::CelestialBody body in FlightGlobals.Bodies)
+                    {
+                        string name = body.name;
+
+                        System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(string.Format(@"\b{0}\b", name));
+
+                        if (r.IsMatch(contract.Title))
+                            return new CelestialBody(body);
+                    }
+                }
+
+                return null;
             }
         }
 
