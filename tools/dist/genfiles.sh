@@ -28,4 +28,5 @@ zip $FILE \
     bazel-krpc/external/csharp_json/lib/net35/Newtonsoft.Json.* \
     bazel-krpc/external/csharp_json/lib/net45/Newtonsoft.Json.* \
     bazel-krpc/external/csharp_options/NDesk.Options.nuspec \
-    bazel-krpc/external/csharp_options/lib/NDesk.Options.*
+    bazel-krpc/external/csharp_options/lib/NDesk.Options.* \
+    bazel-krpc/external/csharp_krpc_io_ports/file/KRPC.IO.Ports.dll
