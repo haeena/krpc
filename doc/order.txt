@@ -1022,6 +1022,7 @@ SpaceCenter.Contract.ReputationCompletion
 SpaceCenter.Contract.ReputationFailure
 SpaceCenter.Contract.ScienceCompletion
 SpaceCenter.Contract.Parameters
+SpaceCenter.Contract.TargetBody
 SpaceCenter.ContractState
 SpaceCenter.ContractState.Active
 SpaceCenter.ContractState.Canceled
