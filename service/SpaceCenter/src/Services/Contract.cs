@@ -266,7 +266,7 @@ namespace KRPC.SpaceCenter.Services
         /// target CelestialBody for the contract.
         /// </summary>
         [KRPCProperty]
-        public CelestialBody targetBody {
+        public CelestialBody TargetBody {
             get
             {
                 var contract = InternalContract;
