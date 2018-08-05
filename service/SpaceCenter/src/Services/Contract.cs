@@ -331,7 +331,7 @@ namespace KRPC.SpaceCenter.Services
                     else
                         checkTitle = true;
                 }
-                catch (System.Exception e)
+                catch (System.Exception)
                 {
                     return null;
                 }
