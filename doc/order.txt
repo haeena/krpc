@@ -1088,6 +1088,7 @@ Drawing.Text.LineSpacing
 Drawing.Text.Anchor
 InfernalRobotics
 InfernalRobotics.Available
+InfernalRobotics.Ready
 InfernalRobotics.ServoGroups
 InfernalRobotics.ServoGroupWithName
 InfernalRobotics.ServoWithName

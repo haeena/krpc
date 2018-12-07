@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Diagnostics.CodeAnalysis;
+using KRPC.Service;
 using KRPC.Service.Attributes;
 using KRPC.SpaceCenter.ExtensionMethods;
 using KRPC.SpaceCenter.ExternalAPI;
@@ -19,7 +21,7 @@ namespace KRPC.SpaceCenter.Services
     /// <remarks>
     /// To get orbital information, such as the apoapsis or inclination, see <see cref="Orbit"/>.
     /// </remarks>
-    [KRPCClass (Service = "SpaceCenter")]
+    [KRPCClass (Service = "SpaceCenter", GameScene = GameScene.Flight)]
     public class Flight : Equatable<Flight>
     {
         readonly Guid vesselId;
@@ -232,7 +234,7 @@ namespace KRPC.SpaceCenter.Services
         }
 
         /// <summary>
-        /// The current G force acting on the vessel in <math>m/s^2</math>.
+        /// The current G force acting on the vessel in <math>g</math>.
         /// </summary>
         [KRPCProperty]
         public float GForce {
@@ -537,7 +539,7 @@ namespace KRPC.SpaceCenter.Services
             } else {
                 Vector3 torque;
                 var altitude = (worldPosition - body.InternalBody.position).magnitude - body.InternalBody.Radius;
-                FAR.CalculateVesselAeroForces(vessel, out worldForce, out torque, worldVelocity, altitude);
+                FAR.CalculateVesselAeroForces(vessel, out worldForce, out torque, worldVelocity - body.InternalBody.getRFrmVel(worldPosition), altitude);
             }
             return referenceFrame.DirectionFromWorldSpace(worldForce).ToTuple();
         }
@@ -631,8 +633,11 @@ namespace KRPC.SpaceCenter.Services
                 if (FAR.IsAvailable) {
                     return (float)FAR.VesselTermVelEst (vessel);
                 } else {
-                    var gravity = Math.Sqrt (vessel.GetTotalMass () * FlightGlobals.getGeeForceAtPosition (WorldCoM).magnitude);
-                    return (float)(Math.Sqrt (gravity / DragMagnitude) * vessel.speed);
+                    var mass = vessel.parts.Sum(part => part.WetMass());
+                    var gForce = FlightGlobals.getGeeForceAtPosition(WorldCoM).magnitude;
+                    var drag = FlightGlobals.ActiveVessel.parts.Sum(part => part.DragCubes.AreaDrag) * PhysicsGlobals.DragCubeMultiplier * PhysicsGlobals.DragMultiplier;
+                    var atmDensity = FlightGlobals.ActiveVessel.atmDensity;
+                    return (float)Math.Sqrt((2.0 * mass * gForce) / (atmDensity * drag));
                 }
             }
         }
