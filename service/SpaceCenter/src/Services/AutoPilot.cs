@@ -22,7 +22,7 @@ namespace KRPC.SpaceCenter.Services
     /// the auto-pilot will be disengaged and its target reference frame, direction and roll
     /// reset to default.
     /// </remarks>
-    [KRPCClass (Service = "SpaceCenter")]
+    [KRPCClass (Service = "SpaceCenter", GameScene = GameScene.Flight)]
     [SuppressMessage ("Gendarme.Rules.Maintainability", "AvoidLackOfCohesionOfMethodsRule")]
     public class AutoPilot : Equatable<AutoPilot>
     {
@@ -256,7 +256,11 @@ namespace KRPC.SpaceCenter.Services
         [KRPCProperty]
         public bool SAS {
             get { return InternalVessel.ActionGroups.groups [BaseAction.GetGroupIndex (KSPActionGroup.SAS)]; }
-            set { InternalVessel.ActionGroups.SetGroup (KSPActionGroup.SAS, value); }
+            set {
+                if (value && engaged [vesselId] == this)
+                    throw new InvalidOperationException("SAS cannot be enabled when the auto-pilot is engaged");
+                InternalVessel.ActionGroups.SetGroup (KSPActionGroup.SAS, value);
+            }
         }
 
         /// <summary>
