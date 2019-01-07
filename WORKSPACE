@@ -638,6 +638,6 @@ http_file(
 
 http_file(
     name = 'module_manager',
-    url = 'https://ksp.sarbian.com/jenkins/job/ModuleManager/142/artifact/ModuleManager.3.1.2.dll',
+    url = 'https://ksp.sarbian.com/jenkins/job/ModuleManager/145/artifact/ModuleManager.3.1.2.dll',
     sha256 = 'e99ae1d81e060bfb11898bd110b890aaea2db9e9de5b961bc70e315dd8571d8e'
 )
