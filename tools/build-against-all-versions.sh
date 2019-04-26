@@ -19,6 +19,7 @@ read -d '' versions << EOM || true
 1.5.0.2332
 1.5.1.2335
 1.6.0.2395
+1.7.0.2483
 EOM
 
 for version in $versions; do
