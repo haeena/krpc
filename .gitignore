@@ -7,4 +7,7 @@ bin
 obj
 KSP.log
 PartDatabase.cfg
-
+venv
+doc/_html
+doc/src/conf.py
+.DS_Store
