@@ -40,9 +40,9 @@ java_checkstyle_test = rule(
     attrs = {
         'srcs': attr.label_list(allow_files=True),
         'config': attr.label(default=Label('//tools/build/checkstyle:google_checks.xml'),
-                             allow_files=True, single_file=True),
+                             allow_single_file=True),
         'properties': attr.label(default=Label('//tools/build/checkstyle:default.properties'),
-                                 allow_files=True, single_file=True),
+                                 allow_single_file=True),
         'checkstyle': attr.label(default=Label('//tools/build/checkstyle'), executable=True, cfg='host')
     },
     test = True

@@ -114,8 +114,8 @@ sphinx_spelling_test = rule(
     implementation = _spelling_impl,
     attrs = {
         'srcs': attr.label_list(allow_files=True),
-        'sphinx_build': attr.label(executable=True, single_file=True,
-                                   allow_files=True, mandatory=True, cfg='host'),
+        'sphinx_build': attr.label(executable=True, allow_single_file=True,
+                                   mandatory=True, cfg='host'),
         'opts': attr.string_dict()
     },
     test = True
@@ -160,8 +160,8 @@ sphinx_linkcheck_test = rule(
     implementation = _linkcheck_impl,
     attrs = {
         'srcs': attr.label_list(allow_files=True),
-        'sphinx_build': attr.label(executable=True, single_file=True,
-                                   allow_files=True, mandatory=True, cfg='host'),
+        'sphinx_build': attr.label(executable=True, allow_single_file=True,
+                                   mandatory=True, cfg='host'),
         'opts': attr.string_dict()
     },
     test = True
