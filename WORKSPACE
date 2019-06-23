@@ -3,31 +3,38 @@ workspace(name = "krpc")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
 http_archive(
+    name = "bazel_skylib",
+    type = "tar.gz",
+    url = "https://github.com/bazelbuild/bazel-skylib/releases/download/0.8.0/bazel-skylib.0.8.0.tar.gz",
+    sha256 = "2ef429f5d7ce7111263289644d233707dba35e39696377ebab8b0bc701f7818e",
+)
+
+http_archive(
     name = 'protoc_linux_x86_32',
     build_file_content = "exports_files(['bin/protoc'])",
-    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_32.zip'],
-    sha256 = 'f4d9235c1ecf2c520ff3d3ebec44457810023fc3093181f76c06871d2e47f413'
+    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.8.0/protoc-3.8.0-linux-x86_32.zip'],
+    sha256 = 'd9be86cb72163b74a940c8865883dd4d374333c22f2c86910eb32214a197b99e'
 )
 
 http_archive(
     name = 'protoc_linux_x86_64',
     build_file_content = "exports_files(['bin/protoc'])",
-    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_64.zip'],
-    sha256 = '6003de742ea3fcf703cfec1cd4a3380fd143081a2eb0e559065563496af27807'
+    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.8.0/protoc-3.8.0-linux-x86_64.zip'],
+    sha256 = '717903f32653f07cd895cfe89ca18ff4ca35f825afa7fe17bcb5cb13bf628be0'
 )
 
 http_archive(
     name = 'protoc_osx_x86_32',
     build_file_content = "exports_files(['bin/protoc'])",
-    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-osx-x86_32.zip'],
-    sha256 = '95aef29c7780130e6b84ea6037ee8ff146ae35d05962ee76f949f7ccb8116b8b'
+    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.8.0/protoc-3.8.0-osx-x86_32.zip'],
+    sha256 = '14376f58d19a7579c43ee95d9f87ed383391d695d4968107f02ed226c13448ae'
 )
 
 http_archive(
     name = 'protoc_win32',
     build_file_content = "exports_files(['bin/protoc.exe'])",
-    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-win32.zip'],
-    sha256 = '65e5d6f890e8df5b6b411e3fdbad04c33b2bd34a3576f343a8986589bd8d05e2'
+    urls = ['https://github.com/protocolbuffers/protobuf/releases/download/v3.8.0/protoc-3.8.0-win32.zip'],
+    sha256 = '93c5b7efe418b539896b2952ab005dd81fa418b76abee8c4341b4796b391999e'
 )
 
 http_archive(
@@ -39,9 +46,9 @@ filegroup(
     visibility = ['//visibility:public']
 )
 """,
-    urls = ['https://jpa.kapsi.fi/nanopb/download/nanopb-0.3.9.1-linux-x86.tar.gz'],
-    sha256 = 'ee18b12ea11376e6b6d89a2cab4592fb1fbaeff3252f180608c9a7632594a12e',
-    strip_prefix = 'nanopb-0.3.9.1-linux-x86'
+    urls = ['https://jpa.kapsi.fi/nanopb/download/nanopb-0.3.9.3-linux-x86.tar.gz'],
+    sha256 = '6e8803ef078188696a2030e747631d9d598c9726fe2b3216c559d7799e2690f7',
+    strip_prefix = 'nanopb-0.3.9.3-linux-x86'
 )
 
 http_archive(
@@ -66,9 +73,9 @@ filegroup(
     visibility = ['//visibility:public']
 )
 """,
-    urls = ['https://jpa.kapsi.fi/nanopb/download/nanopb-0.3.9.1-linux-x86.tar.gz'],
-    sha256 = 'ee18b12ea11376e6b6d89a2cab4592fb1fbaeff3252f180608c9a7632594a12e',
-    strip_prefix = 'nanopb-0.3.9.1-linux-x86'
+    urls = ['https://jpa.kapsi.fi/nanopb/download/nanopb-0.3.9.3-linux-x86.tar.gz'],
+    sha256 = '6e8803ef078188696a2030e747631d9d598c9726fe2b3216c559d7799e2690f7',
+    strip_prefix = 'nanopb-0.3.9.3-linux-x86'
 )
 
 http_file(
@@ -80,7 +87,7 @@ http_file(
 http_archive(
     name = 'csharp_protobuf',
     build_file_content = "exports_files(['lib/net45/Google.Protobuf.dll'])",
-    urls = ['https://www.nuget.org/api/v2/package/Google.Protobuf/3.6.1'],
+    urls = ['https://www.nuget.org/api/v2/package/Google.Protobuf/3.8.0'],
     type = 'zip'
 )
 
@@ -151,9 +158,17 @@ http_archive(
 
 http_archive(
     name = 'com_google_protobuf',
-    urls = ['https://github.com/google/protobuf/releases/download/v3.6.1/protobuf-cpp-3.6.1.tar.gz'],
-    strip_prefix = 'protobuf-3.6.1',
-    sha256 = 'b3732e471a9bb7950f090fd0457ebd2536a9ba0891b7f3785919c654fe2a2529'
+    urls = ['https://github.com/google/protobuf/releases/download/v3.8.0/protobuf-cpp-3.8.0.tar.gz'],
+    strip_prefix = 'protobuf-3.8.0',
+    sha256 = 'ddc96d83f3b7417da53bce2510b94ad2796465ef8763f7a4e82089157efe97aa'
+)
+
+http_archive(
+    name = "zlib",
+    build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
+    sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
+    strip_prefix = "zlib-1.2.11",
+    urls = ["https://zlib.net/zlib-1.2.11.tar.gz"],
 )
 
 http_archive(
@@ -222,7 +237,7 @@ http_file(
 
 maven_jar(
     name = 'java_protobuf',
-    artifact = 'com.google.protobuf:protobuf-java:3.6.1',
+    artifact = 'com.google.protobuf:protobuf-java:3.8.0',
     sha1 = '0d06d46ecfd92ec6d0f3b423b4cd81cb38d8b924'
 )
 
@@ -316,7 +331,7 @@ http_file(
 
 http_file(
     name = 'lua_luasocket',
-    urls = ['https://luarocks.org/manifests/luarocks/luasocket-3.0rc1-2.src.rock'],
+    urls = ['https://luarocks.org/manifests/luasocket/luasocket-3.0rc1-2.src.rock'],
     sha256 = '3882f2a1e1c6145ceb43ead385b861b97fa2f8d487e8669ec5b747406ab251c7'
 )
 
@@ -502,7 +517,7 @@ http_file(
 
 http_file(
     name = 'python_protobuf',
-    urls = ['https://files.pythonhosted.org/packages/1b/90/f531329e628ff34aee79b0b9523196eb7b5b6b398f112bb0c03b24ab1973/protobuf-3.6.1.tar.gz'],
+    urls = ['https://files.pythonhosted.org/packages/1b/90/f531329e628ff34aee79b0b9523196eb7b5b6b398f112bb0c03b24ab1973/protobuf-3.8.0.tar.gz'],
     sha256 = '1489b376b0f364bcc6f89519718c057eb191d7ad6f1b395ffd93d1aa45587811'
 )
 
