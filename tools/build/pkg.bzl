@@ -36,7 +36,7 @@ def _stage_files_impl(ctx):
     outs = []
     for src in ctx.files.srcs:
         path = ctx.label.name + '/' + _apply_path_map(ctx.attr.path_map, src.short_path)
-        out = ctx.new_file(ctx.configuration.genfiles_dir, path)
+        out = ctx.actions.declare_file(ctx.configuration.genfiles_dir, path)
 
         sub_commands = ['cp "%s" "%s"' % (src.path, out.path)]
 

@@ -98,7 +98,7 @@ def _spelling_impl(ctx):
     ]
     sub_commands.append('('+'; '.join(sphinx_commands)+')')
 
-    ctx.file_action(
+    ctx.actions.write(
         output = out,
         content = ' &&\n'.join(sub_commands)+'\n',
         executable = True
@@ -144,7 +144,7 @@ def _linkcheck_impl(ctx):
     ]
     sub_commands.append('('+'; '.join(sphinx_commands)+')')
 
-    ctx.file_action(
+    ctx.actions.write(
         output = out,
         content = ' &&\n'.join(sub_commands)+'\n',
         executable = True

@@ -58,13 +58,13 @@ protobuf_lua = rule(
 
 def _env_impl(ctx):
     pylibs = [ctx.file._protobuf, ctx.file._six]
-    setup = ctx.new_file(ctx.configuration.genfiles_dir, 'protoc-lua-setup')
-    ctx.file_action(
+    setup = ctx.actions.declare_file('{}/protoc-lua-setup'.format(ctx.configuration.genfiles_dir))
+    ctx.actions.write(
         output = setup,
         content = ' && \\\n'.join(_create_py_env(ctx.outputs.out.path, pylibs))+'\n',
-        executable = True
+        is_executable = True
     )
-    ctx.action(
+    ctx.actions.run(
         inputs = pylibs,
         outputs = [ctx.outputs.out],
         progress_message = 'Setting up protoc-lua python environment',
