@@ -3,6 +3,7 @@ load('//tools/build:csharp.bzl', 'csharp_reference')
 package(default_visibility = ['//visibility:public'])
 
 csharp_reference(name = 'UnityEngine', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.dll')
+csharp_reference(name = 'UnityEngine.CoreModule', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.CoreModule.dll')
 csharp_reference(name = 'UnityEngine.UI', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.UI.dll')
 csharp_reference(name = 'Assembly-CSharp', file = '//lib:ksp/KSP_Data/Managed/Assembly-CSharp.dll')
 csharp_reference(name = 'Assembly-CSharp-firstpass', file = '//lib:ksp/KSP_Data/Managed/Assembly-CSharp-firstpass.dll')
