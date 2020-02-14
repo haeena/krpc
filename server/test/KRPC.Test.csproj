@@ -54,6 +54,9 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\lib\ksp\KSP_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>..\..\lib\ksp\KSP_Data\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>..\..\bazel-genfiles\tools\cslibs\net45\Google.Protobuf.dll</HintPath>
     </Reference>

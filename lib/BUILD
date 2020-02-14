@@ -13,6 +13,7 @@ exports_files ([
     'ksp/KSP_Data/Managed/UnityEngine.CoreModule.dll',
     'ksp/KSP_Data/Managed/UnityEngine.IMGUIModule.dll',
     'ksp/KSP_Data/Managed/UnityEngine.InputLegacyModule.dll',
+    'ksp/KSP_Data/Managed/UnityEngine.SharedInternalsModule.dll',
     'ksp/KSP_Data/Managed/UnityEngine.UI.dll',
 
     'ksp/KSP_Data/Managed/mscorlib.dll',

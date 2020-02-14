@@ -8,6 +8,7 @@ csharp_reference(name = 'UnityEngine.CoreModule', file = '//lib:ksp/KSP_Data/Man
 csharp_reference(name = 'UnityEngine.IMGUIModule', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.IMGUIModule.dll')
 csharp_reference(name = 'UnityEngine.InputLegacyModule', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.InputLegacyModule.dll')
 csharp_reference(name = 'UnityEngine.UI', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.UI.dll')
+csharp_reference(name = 'UnityEngine.SharedInternalsModule', file = '//lib:ksp/KSP_Data/Managed/UnityEngine.SharedInternalsModule.dll')
 csharp_reference(name = 'Assembly-CSharp', file = '//lib:ksp/KSP_Data/Managed/Assembly-CSharp.dll')
 csharp_reference(name = 'Assembly-CSharp-firstpass', file = '//lib:ksp/KSP_Data/Managed/Assembly-CSharp-firstpass.dll')
 
